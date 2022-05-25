@@ -1,12 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState} from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-const Stack = createNativeStackNavigator();
+import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity } from 'react-native';
 
-
-function UsernameTab({navigation}) {
+const UsernameTab = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,11 +24,11 @@ function UsernameTab({navigation}) {
         defaultValue={password}
         autoCorrect={false}
         autoCapitalize='none'
-        // secureTextEntry={true}
+        secureTextEntry={true}
       />
       <TouchableOpacity 
       style={styles.button}
-      onPress={() => checkInfoCorrect(username, password) ? navigation.navigate("CalendarPage") : alert("wrong password")}>
+      onPress={UsernameTab}>
         <Text style={[styles.text, {marginTop: 0, marginBottom: 0}]}>Submit</Text>
       </TouchableOpacity>
 
@@ -40,27 +36,14 @@ function UsernameTab({navigation}) {
   );
 }
 
-function CalendarTab() {
-  return (
-  <ScrollView>
-    <Text style={styles.text}>Calendar here</Text>
-  </ScrollView>
-  );
-}
-
-function checkInfoCorrect(username, password) {
-  return (username == "hi" && password == "bye");
-}
 // export default usernameTab;
 export default function App() {
   return(
-  <NavigationContainer>
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen style={styles.container} name="Login" component={UsernameTab} />
-      <Stack.Screen name="CalendarPage" component={CalendarTab} />
-    </Stack.Navigator>
-  </NavigationContainer>
-  );
+  <>
+  <UsernameTab />
+  {/* <UsernameTab /> */}
+   {/*Note that components must be capitalised  */}
+  </>);
 }
 
 const styles = StyleSheet.create({
